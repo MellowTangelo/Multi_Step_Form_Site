@@ -76,8 +76,8 @@ header {
   font-size: 0.75rem;
 }
 
-.page-one,
-.page-two {
+.page-1,
+.page-2 {
   background-color: white;
   position: absolute;
   display: flex;
@@ -144,7 +144,7 @@ header {
 .next-step-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -154,6 +154,10 @@ header {
   padding-left: 0.5rem;
 }
 
+.next-step-container.both-buttons {
+  justify-content: space-between;
+}
+
 .previous-step-button {
   border: none;
   background-color: transparent;
@@ -161,7 +165,7 @@ header {
   color: hsl(231, 11%, 63%);
   padding: 0.5rem;
   cursor: pointer;
-  transition: color 0.4ms ease-in-out;
+  transition: color 0.4s ease-in-out;
 }
 
 .previous-step-button:hover {
@@ -176,19 +180,24 @@ header {
   font-family: "Ubuntu-Regular", Arial;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
-  transition: background-color 0.4ms ease-in-out;
+  transition: background-color 0.4s ease-in-out;
 }
 
 .next-step-button:hover {
   background-color: hsl(213, 96%, 18%, 85%);
 }
 
-.page-one {
-  display: none; /*Temporary*/
+.page-1.active,
+.page-2.active,
+.previous-step-button.active {
+  display: initial; /*Temporary*/
 }
 
-.page-two {
-  display: initial; /*Temporary*/
+.page-1,
+.page-2,
+.previous-step-button {
+  display: none; /*Temporary*/
+  transition: opacity 0.4s ease-in-out;
 }
 
 .plan-info {
@@ -248,17 +257,17 @@ header {
   align-items: center;
   border-radius: 0.5rem;
   margin-top: 1rem;
-  padding: 1rem
+  padding: 1rem;
 }
 
 .yearly {
-  font-family: 'Ubuntu-Bold', 'Arial';
+  font-family: "Ubuntu-Bold", "Arial";
   color: hsl(231, 11%, 63%);
   font-size: 0.875rem;
 }
 
 .monthly {
-  font-family: 'Ubuntu-Bold', 'Arial';
+  font-family: "Ubuntu-Bold", "Arial";
   color: hsl(213, 96%, 18%);
   font-size: 0.875rem;
 }
@@ -270,7 +279,7 @@ header {
   height: 1.625rem;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -293,7 +302,7 @@ header {
   height: 1.25rem;
   width: 1.25rem;
   left: 0.25rem;
-  bottom: 0.175rem;
+  bottom: 0.2rem;
   background-color: white;
   transition: 0.4s;
 }
@@ -331,15 +340,14 @@ input:checked + .slider:before {
     border-radius: 0.5rem;
     padding-left: 1rem;
     padding-right: 4rem;
-
   }
 
   .page-content {
     padding: 2rem 3rem 1rem;
   }
 
-  .page-one,
-  .page-two {
+  .page-1,
+  .page-2 {
     position: initial;
     padding: 0;
     margin: 0;
@@ -379,5 +387,9 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: first baseline;
     gap: 2.5rem;
+  }
+
+  .slider:before {
+    bottom: 0.175rem;
   }
 }
