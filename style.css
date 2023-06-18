@@ -26,7 +26,6 @@ body {
 }
 
 main {
-  max-width: 768px;
   margin: 0 auto;
 }
 
@@ -54,13 +53,17 @@ header {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-}
-
-.step-number p {
   font-family: "Ubuntu-Bold", Arial;
   color: white;
   padding: 0.35rem 0.6rem;
   font-size: 0.75rem;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.step-number.active {
+  border: 1px hsl(206, 94%, 87%) solid;
+  color: black;
+  background-color: hsl(206, 94%, 87%);
 }
 
 .step-name {
@@ -165,7 +168,7 @@ header {
   color: hsl(231, 11%, 63%);
   padding: 0.5rem;
   cursor: pointer;
-  transition: color 0.4s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .previous-step-button:hover {
@@ -180,24 +183,61 @@ header {
   font-family: "Ubuntu-Regular", Arial;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
-  transition: background-color 0.4s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .next-step-button:hover {
   background-color: hsl(213, 96%, 18%, 85%);
 }
 
-.page-1.active,
-.page-2.active,
-.previous-step-button.active {
-  display: initial; /*Temporary*/
+/* .page-1.appear,
+.page-2.appear {
+  display: initial;
+}
+
+.page-1.show,
+.page-2.show {
+  transform: translate(0, 0);
 }
 
 .page-1,
-.page-2,
+.page-2 {
+  display: none;
+  transform: translate(110%, 0);
+  transition: transform 0.3s ease-in-out;
+} */
+
+.page-1.appear,
+.page-2.appear {
+  display: initial;
+}
+
+.page-1.show,
+.page-2.show {
+  opacity: 1;
+}
+
+.page-1,
+.page-2 {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.previous-step-button.appear {
+  display: initial;
+}
+
 .previous-step-button {
-  display: none; /*Temporary*/
-  transition: opacity 0.4s ease-in-out;
+  display: none;
+  opacity: 0;
+  transform: translate(110%, 0);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.previous-step-button.show {
+  transform: translate(0, 0);
+  opacity: 1;
 }
 
 .plan-info {
@@ -218,11 +258,6 @@ header {
   border: 1px solid hsl(231, 11%, 63%, 50%);
   gap: 1rem;
   transition: border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-}
-
-.plan-button:hover {
-  border-color: hsl(213, 96%, 18%);
-  background-color: hsla(228, 100%, 84%, 25%);
 }
 
 .plan-container {
@@ -259,17 +294,17 @@ header {
   margin-top: 1rem;
   padding: 1rem;
 }
-
+.monthly,
 .yearly {
   font-family: "Ubuntu-Bold", "Arial";
   color: hsl(231, 11%, 63%);
   font-size: 0.875rem;
+  transition: color 0.3s ease-in-out;
 }
 
-.monthly {
-  font-family: "Ubuntu-Bold", "Arial";
+.yearly.active,
+.monthly.active {
   color: hsl(213, 96%, 18%);
-  font-size: 0.875rem;
 }
 
 .switch {
@@ -293,7 +328,7 @@ header {
   right: 0;
   bottom: 0;
   background-color: hsl(213, 96%, 18%);
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 .slider:before {
@@ -304,10 +339,10 @@ header {
   left: 0.25rem;
   bottom: 0.2rem;
   background-color: white;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
-input:checked + .slider:before {
+.switch input:checked + .slider:before {
   transform: translateX(1.25rem);
 }
 
@@ -319,7 +354,51 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-@media only screen and (min-width: 800px) {
+.arcade,
+.advanced,
+.pro {
+  position: relative;
+}
+
+.arcade input,
+.advanced input,
+.pro input {
+  position: absolute;
+  opacity: 0;
+}
+
+.arcade input:checked + .plan-button,
+.advanced input:checked + .plan-button,
+.pro input:checked + .plan-button {
+  border-color: hsl(213, 96%, 18%);
+  background-color: hsla(228, 100%, 84%, 25%);
+}
+
+.plan-button:hover {
+  border-color: hsl(213, 96%, 18%);
+  background-color: hsla(228, 100%, 84%, 25%);
+}
+
+.plan-cost.arcade,
+.plan-cost.advanced,
+.plan-cost.pro {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.yearly-discount {
+  display: none;
+  font-family: "Ubuntu-Regular", Arial;
+  color: hsl(213, 96%, 18%);
+  font-size: 0.75rem;
+  transition: opacity 0.3s e
+  ase-in-out;
+}
+
+.yearly-discount.active {
+  display: block;
+}
+
+@media only screen and (min-width: 700px) {
   body {
     display: flex;
     align-items: center;
@@ -327,8 +406,11 @@ input:checked + .slider:before {
   }
 
   main {
-    display: flex;
+    display: grid;
+    grid-template: 1fr / 1fr 2fr;
     background-color: white;
+    justify-content: space-between;
+    width: 700px;
     border-radius: 0.5rem;
     padding: 0.75rem;
     box-shadow: 0 10px 10px -10px lightgrey;
@@ -343,7 +425,7 @@ input:checked + .slider:before {
   }
 
   .page-content {
-    padding: 2rem 3rem 1rem;
+    padding: 2rem 4rem 0rem;
   }
 
   .page-1,
