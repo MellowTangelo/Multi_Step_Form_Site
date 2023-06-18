@@ -390,8 +390,7 @@ header {
   font-family: "Ubuntu-Regular", Arial;
   color: hsl(213, 96%, 18%);
   font-size: 0.75rem;
-  transition: opacity 0.3s e
-  ase-in-out;
+  transition: opacity 0.3s e ase-in-out;
 }
 
 .yearly-discount.active {
