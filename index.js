@@ -1,6 +1,7 @@
 /*  */
 const pageOne = document.querySelector(".page-1");
 const pageTwo = document.querySelector(".page-2");
+const pageThree = document.querySelector(".page-3");
 const previousStepButton = document.querySelector(".previous-step-button");
 const nextStepButton = document.querySelector(".next-step-button");
 const nextStepContainer = document.querySelector(".next-step-container");
@@ -191,6 +192,10 @@ const switchInput = document.querySelector(".switch-input");
 const arcadeCostLabel = document.querySelector(".plan-cost.arcade");
 const advancedCostLabel = document.querySelector(".plan-cost.advanced");
 const proCostLabel = document.querySelector(".plan-cost.pro");
+const serviceCostLabel = document.querySelector(".add-on-cost.service");
+const storageCostLabel = document.querySelector(".add-on-cost.storage");
+const profileCostLabel = document.querySelector(".add-on-cost.profile");
+
 const yearlyDiscountLabels = document.querySelectorAll(".yearly-discount");
 
 switchInput.addEventListener("change", () => {
@@ -212,10 +217,16 @@ switchInput.addEventListener("change", () => {
       arcadeCostLabel.textContent = "$9/mo";
       advancedCostLabel.textContent = "$12/mo";
       proCostLabel.textContent = "$15/mo";
+      serviceCostLabel.textContent = "$1/mo";
+      storageCostLabel.textContent = "$2/mo";
+      profileCostLabel.textContent = "$2/mo";
     } else {
       arcadeCostLabel.textContent = "$90/yr";
       advancedCostLabel.textContent = "$120/yr";
       proCostLabel.textContent = "$150/yr";
+      serviceCostLabel.textContent = "$10/yr";
+      storageCostLabel.textContent = "$20/yr";
+      profileCostLabel.textContent = "$20/yr";
     }
   }, 200);
 

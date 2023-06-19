@@ -61,7 +61,9 @@
             </li>
             <li>
               <div class="label-container">
-                <label for="email-input" class="email-label">Email Address</label>
+                <label for="email-input" class="email-label"
+                  >Email Address</label
+                >
                 <p class="warning-msg">This field is required</p>
               </div>
               <input
@@ -74,7 +76,9 @@
             </li>
             <li>
               <div class="label-container">
-                <label for="phone-input" class="phone-label">Phone Number</label>
+                <label for="phone-input" class="phone-label"
+                  >Phone Number</label
+                >
                 <p class="warning-msg">This field is required</p>
               </div>
               <input
@@ -94,7 +98,12 @@
           </p>
           <ul class="plan-info">
             <li class="arcade">
-              <input id="arcade-option" type="radio" name="plan-option" checked/>
+              <input
+                id="arcade-option"
+                type="radio"
+                name="plan-option"
+                checked
+              />
               <label for="arcade-option" class="plan-button">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -177,6 +186,62 @@
             </label>
             <p class="yearly">Yearly</p>
           </div>
+        </form>
+        <form class="page-3">
+          <h1 class="page-title">Pick add-ons</h1>
+          <p class="page-description">
+            Add-ons help enhance your gaming experience.
+          </p>
+          <ul class="add-on-info">
+            <li class="online-service">
+              <label for="online-service-option" class="add-on-button">
+                <div class="add-on-container">
+                  <input
+                    id="online-service-option"
+                    type="checkbox"
+                    name="online-service-option"
+                  />
+                  <div class="plan-container">
+                    <p class="plan-name">Online service</p>
+                    <p class="add-on-detail">Access to multiplayer games</p>
+                  </div>
+                </div>
+                <p class="add-on-cost service">$1/mo</p>
+              </label>
+            </li>
+            <li class="larger-storage">
+              <label for="larger-storage-option" class="add-on-button">
+                <div class="add-on-container">
+                  <input
+                    id="larger-storage-option"
+                    type="checkbox"
+                    name="larger-storage-option"
+                  />
+                  <div class="plan-container">
+                    <p class="plan-name">Larger storage</p>
+                    <p class="add-on-detail">Extra 1TB of cloud save</p>
+                  </div>
+                </div>
+                <p class="add-on-cost storage">$2/mo</p>
+              </label>
+            </li>
+            <li class="customizable-profile">
+              <label for="customizable-profile-option" class="add-on-button">
+                <div class="add-on-container">
+                  <input
+                    id="customizable-profile-option"
+                    type="checkbox"
+                    name="customizable-profile-option"
+                  />
+                  <div class="plan-container">
+                    <p class="plan-name">Customizable profile</p>
+                    <p class="add-on-detail">Custom theme on your profile</p>
+                  </div>
+                </div>
+                <p class="add-on-cost profile">$2/mo</p>
+              </label>
+            </li>
+          </ul>
         </form>
         <div class="next-step-container">
           <button class="previous-step-button">Go back</button>
