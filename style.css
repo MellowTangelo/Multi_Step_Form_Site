@@ -376,7 +376,6 @@ header {
 
 .plan-button:hover {
   border-color: hsl(213, 96%, 18%);
-  background-color: hsla(228, 100%, 84%, 25%);
 }
 
 .plan-cost.arcade,
@@ -410,9 +409,15 @@ header {
     background-color: white;
     justify-content: space-between;
     width: 700px;
+    height: auto;
     border-radius: 0.5rem;
     padding: 0.75rem;
     box-shadow: 0 10px 10px -10px lightgrey;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  main.disappear {
+    opacity: 0;
   }
 
   header {

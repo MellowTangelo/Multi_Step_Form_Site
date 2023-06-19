@@ -5,6 +5,7 @@ const previousStepButton = document.querySelector(".previous-step-button");
 const nextStepButton = document.querySelector(".next-step-button");
 const nextStepContainer = document.querySelector(".next-step-container");
 const navbarStepNumber = document.querySelectorAll(".step-number");
+const mainContianer = document.querySelector(".main-container");
 
 let currentPageIndex = 0;
 pageOne.classList.add("appear");
@@ -21,16 +22,36 @@ previousStepButton.addEventListener("click", () => {
 function turnNextPage(index) {
   currentPageIndex = index + 1;
 
-  if (currentPageIndex === 1) {
-    pageOne.classList.remove("show");
-    pageTwo.classList.add("appear");
-    previousStepButton.classList.add("appear");
-  } else if (currentPageIndex === 2) {
-    pageTwo.classList.remove("show");
-    pageThree.classList.add("appear");
-  } else if (currentPageIndex === 3) {
-    pageThree.classList.remove("show");
-    pageFour.classList.add("appear");
+  let windowSize = window.innerWidth;
+
+  if (windowSize >= 700) {
+    mainContianer.classList.add("disappear");
+
+    setTimeout(function () {
+      if (currentPageIndex === 1) {
+        pageOne.classList.remove("show");
+        pageTwo.classList.add("appear");
+        previousStepButton.classList.add("appear");
+      } else if (currentPageIndex === 2) {
+        pageTwo.classList.remove("show");
+        pageThree.classList.add("appear");
+      } else if (currentPageIndex === 3) {
+        pageThree.classList.remove("show");
+        pageFour.classList.add("appear");
+      }
+    }, 300);
+  } else {
+    if (currentPageIndex === 1) {
+      pageOne.classList.remove("show");
+      pageTwo.classList.add("appear");
+      previousStepButton.classList.add("appear");
+    } else if (currentPageIndex === 2) {
+      pageTwo.classList.remove("show");
+      pageThree.classList.add("appear");
+    } else if (currentPageIndex === 3) {
+      pageThree.classList.remove("show");
+      pageFour.classList.add("appear");
+    }
   }
 
   setTimeout(function () {
@@ -53,25 +74,52 @@ function turnNextPage(index) {
       pageThree.classList.remove("appear");
       pageFour.classList.add("show");
     }
+
+    if (windowSize >= 700) {
+      mainContianer.classList.remove("disappear");
+    }
   }, 300);
 }
 
 function turnPreviousPage(index) {
   currentPageIndex = index - 1;
 
-  if (currentPageIndex === 0) {
-    pageOne.classList.add("appear");
-    pageTwo.classList.remove("show");
-    previousStepButton.classList.remove("show");
-  } else if (currentPageIndex === 1) {
-    pageTwo.classList.add("appear");
-    pageThree.classList.remove("show");
-  } else if (currentPageIndex === 2) {
-    pageThree.classList.add("appear");
-    pageFour.classList.remove("show");
-  } else if (currentPageIndex === 3) {
-    pageFour.classList.add("appear");
-    pageFive.classList.remove("show");
+  let windowSize = window.innerWidth;
+
+  if (windowSize >= 700) {
+    mainContianer.classList.add("disappear");
+
+    setTimeout(function () {
+      if (currentPageIndex === 0) {
+        pageOne.classList.add("appear");
+        pageTwo.classList.remove("show");
+        previousStepButton.classList.remove("show");
+      } else if (currentPageIndex === 1) {
+        pageTwo.classList.add("appear");
+        pageThree.classList.remove("show");
+      } else if (currentPageIndex === 2) {
+        pageThree.classList.add("appear");
+        pageFour.classList.remove("show");
+      } else if (currentPageIndex === 3) {
+        pageFour.classList.add("appear");
+        pageFive.classList.remove("show");
+      }
+    }, 300);
+  } else {
+    if (currentPageIndex === 0) {
+      pageOne.classList.add("appear");
+      pageTwo.classList.remove("show");
+      previousStepButton.classList.remove("show");
+    } else if (currentPageIndex === 1) {
+      pageTwo.classList.add("appear");
+      pageThree.classList.remove("show");
+    } else if (currentPageIndex === 2) {
+      pageThree.classList.add("appear");
+      pageFour.classList.remove("show");
+    } else if (currentPageIndex === 3) {
+      pageFour.classList.add("appear");
+      pageFive.classList.remove("show");
+    }
   }
 
   setTimeout(function () {
@@ -91,11 +139,15 @@ function turnPreviousPage(index) {
       pageTwo.classList.add("show");
       pageThree.classList.remove("appear");
     } else if (currentPageIndex === 2) {
-      pageThree.classList.add("shoe");
+      pageThree.classList.add("show");
       pageFour.classList.remove("appear");
     } else if (currentPageIndex === 3) {
       pageFour.classList.add("show");
       pageFive.classList.remove("appear");
+    }
+
+    if (windowSize >= 700) {
+      mainContianer.classList.remove("disappear");
     }
   }, 300);
 }
