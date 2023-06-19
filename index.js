@@ -7,6 +7,11 @@ const nextStepContainer = document.querySelector(".next-step-container");
 const navbarStepNumber = document.querySelectorAll(".step-number");
 const mainContianer = document.querySelector(".main-container");
 
+const nameField = document.querySelector(".name-textarea");
+const emailField = document.querySelector(".email-textarea");
+const phoneField = document.querySelector(".phone-textarea");
+const warningMsg = document.querySelectorAll(".warning-msg");
+
 let currentPageIndex = 0;
 pageOne.classList.add("appear");
 pageOne.classList.add("show");
@@ -20,14 +25,53 @@ previousStepButton.addEventListener("click", () => {
 });
 
 function turnNextPage(index) {
-  currentPageIndex = index + 1;
+  if (nameField.value === "") {
+    warningMsg[0].classList.add("active");
+    nameField.classList.add("invalid");
+  } else {
+    warningMsg[0].classList.remove("active");
+    nameField.classList.remove("invalid");
+  }
+  if (emailField.value === "") {
+    warningMsg[1].classList.add("active");
+    emailField.classList.add("invalid");
+  } else {
+    warningMsg[1].classList.remove("active");
+    emailField.classList.remove("invalid");
+  }
+  if (phoneField.value === "") {
+    warningMsg[2].classList.add("active");
+    phoneField.classList.add("invalid");
+  } else {
+    warningMsg[2].classList.remove("active");
+    phoneField.classList.remove("invalid");
+  }
 
-  let windowSize = window.innerWidth;
+  if (
+    nameField.value !== "" &&
+    emailField.value !== "" &&
+    phoneField.value !== ""
+  ) {
+    currentPageIndex = index + 1;
+    let windowSize = window.innerWidth;
 
-  if (windowSize >= 700) {
-    mainContianer.classList.add("disappear");
+    if (windowSize >= 700) {
+      mainContianer.classList.add("disappear");
 
-    setTimeout(function () {
+      setTimeout(function () {
+        if (currentPageIndex === 1) {
+          pageOne.classList.remove("show");
+          pageTwo.classList.add("appear");
+          previousStepButton.classList.add("appear");
+        } else if (currentPageIndex === 2) {
+          pageTwo.classList.remove("show");
+          pageThree.classList.add("appear");
+        } else if (currentPageIndex === 3) {
+          pageThree.classList.remove("show");
+          pageFour.classList.add("appear");
+        }
+      }, 300);
+    } else {
       if (currentPageIndex === 1) {
         pageOne.classList.remove("show");
         pageTwo.classList.add("appear");
@@ -39,46 +83,34 @@ function turnNextPage(index) {
         pageThree.classList.remove("show");
         pageFour.classList.add("appear");
       }
-    }, 300);
-  } else {
-    if (currentPageIndex === 1) {
-      pageOne.classList.remove("show");
-      pageTwo.classList.add("appear");
-      previousStepButton.classList.add("appear");
-    } else if (currentPageIndex === 2) {
-      pageTwo.classList.remove("show");
-      pageThree.classList.add("appear");
-    } else if (currentPageIndex === 3) {
-      pageThree.classList.remove("show");
-      pageFour.classList.add("appear");
     }
-  }
 
-  setTimeout(function () {
-    navbarStepNumber.forEach((stepNumber, index) => {
-      if (index === currentPageIndex) {
-        stepNumber.classList.add("active");
-      } else {
-        stepNumber.classList.remove("active");
+    setTimeout(function () {
+      navbarStepNumber.forEach((stepNumber, index) => {
+        if (index === currentPageIndex) {
+          stepNumber.classList.add("active");
+        } else {
+          stepNumber.classList.remove("active");
+        }
+      });
+      if (currentPageIndex === 1) {
+        pageOne.classList.remove("appear");
+        pageTwo.classList.add("show");
+        previousStepButton.classList.add("show");
+        nextStepContainer.classList.add("both-buttons");
+      } else if (currentPageIndex === 2) {
+        pageTwo.classList.remove("appear");
+        pageThree.classList.add("show");
+      } else if (currentPageIndex === 3) {
+        pageThree.classList.remove("appear");
+        pageFour.classList.add("show");
       }
-    });
-    if (currentPageIndex === 1) {
-      pageOne.classList.remove("appear");
-      pageTwo.classList.add("show");
-      previousStepButton.classList.add("show");
-      nextStepContainer.classList.add("both-buttons");
-    } else if (currentPageIndex === 2) {
-      pageTwo.classList.remove("appear");
-      pageThree.classList.add("show");
-    } else if (currentPageIndex === 3) {
-      pageThree.classList.remove("appear");
-      pageFour.classList.add("show");
-    }
 
-    if (windowSize >= 700) {
-      mainContianer.classList.remove("disappear");
-    }
-  }, 300);
+      if (windowSize >= 700) {
+        mainContianer.classList.remove("disappear");
+      }
+    }, 300);
+  }
 }
 
 function turnPreviousPage(index) {

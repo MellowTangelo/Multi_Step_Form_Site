@@ -47,7 +47,10 @@
           </p>
           <ul class="personal-info">
             <li>
-              <label for="name-input" class="name-label">Name</label>
+              <div class="label-container">
+                <label for="name-input" class="name-label">Name</label>
+                <p class="warning-msg">This field is required</p>
+              </div>
               <input
                 id="name-input"
                 type="text"
@@ -57,7 +60,10 @@
               />
             </li>
             <li>
-              <label for="email-input" class="email-label">Email Address</label>
+              <div class="label-container">
+                <label for="email-input" class="email-label">Email Address</label>
+                <p class="warning-msg">This field is required</p>
+              </div>
               <input
                 id="email-input"
                 type="text"
@@ -67,7 +73,10 @@
               />
             </li>
             <li>
-              <label for="phone-input" class="phone-label">Phone Number</label>
+              <div class="label-container">
+                <label for="phone-input" class="phone-label">Phone Number</label>
+                <p class="warning-msg">This field is required</p>
+              </div>
               <input
                 id="phone-input"
                 type="text"
@@ -85,7 +94,7 @@
           </p>
           <ul class="plan-info">
             <li class="arcade">
-              <input id="arcade-option" type="radio" name="plan-option" />
+              <input id="arcade-option" type="radio" name="plan-option" checked/>
               <label for="arcade-option" class="plan-button">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
