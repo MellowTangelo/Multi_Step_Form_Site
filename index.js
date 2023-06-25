@@ -1,16 +1,63 @@
 const pageOne = document.querySelector(".page-1");
 const pageTwo = document.querySelector(".page-2");
 const pageThree = document.querySelector(".page-3");
+const pageFour = document.querySelector(".page-4");
+const pageFive = document.querySelector(".page-5");
 const previousStepButton = document.querySelector(".previous-step-button");
 const nextStepButton = document.querySelector(".next-step-button");
 const nextStepContainer = document.querySelector(".next-step-container");
 const navbarStepNumber = document.querySelectorAll(".step-number");
 const mainContianer = document.querySelector(".main-container");
 
+const monthlyLabel = document.querySelector(".monthly");
+monthlyLabel.classList.add("active");
+const yearlyLabel = document.querySelector(".yearly");
+const switchInput = document.querySelector(".switch-input");
+
+const arcadeCostLabel = document.querySelector(".plan-cost.arcade");
+const advancedCostLabel = document.querySelector(".plan-cost.advanced");
+const proCostLabel = document.querySelector(".plan-cost.pro");
+const serviceCostLabel = document.querySelector(".add-on-cost.service");
+const storageCostLabel = document.querySelector(".add-on-cost.storage");
+const profileCostLabel = document.querySelector(".add-on-cost.profile");
+const yearlyDiscountLabels = document.querySelectorAll(".yearly-discount");
+
 const nameField = document.querySelector(".name-textarea");
 const emailField = document.querySelector(".email-textarea");
 const phoneField = document.querySelector(".phone-textarea");
 const warningMsg = document.querySelectorAll(".warning-msg");
+
+const chosenPlanLabel = document.querySelector(".chosen-plan");
+const planTotalLabel = document.querySelector(".plan-total");
+const chosenPeriodLabel = document.querySelector(".chosen-period");
+const totalPeriodLabel = document.querySelector(".total-period");
+const arcadeRadio = document.querySelector(".arcade-option");
+const advancedRadio = document.querySelector(".advanced-option");
+const proRadio = document.querySelector(".pro-option");
+const totalValueLabel = document.querySelector(".total-value");
+const changePlanButton = document.querySelector(".change-plan-button");
+const submitButton = document.querySelector(".submit-button");
+const pageContent = document.querySelector(".page-content");
+
+const onlineServiceContainer = document.querySelector(
+  ".online-service-wrapper"
+);
+const largerStorageContainer = document.querySelector(
+  ".larger-storage-wrapper"
+);
+const customizableProfileContainer = document.querySelector(
+  ".customizable-profile-wrapper"
+);
+const onlineServiceCheckbox = document.querySelector(".online-service-option");
+const largerStorageCheckbox = document.querySelector(".larger-storage-option");
+const customizableProfileCheckbox = document.querySelector(
+  ".customizable-profile-option"
+);
+const onlineServiceTotal = document.querySelector(".online-service-total");
+const largerStorageTotal = document.querySelector(".larger-storage-total");
+const customizableProfileTotal = document.querySelector(
+  ".customizable-profile-total"
+);
 
 let currentPageIndex = 0;
 pageOne.classList.add("appear");
@@ -23,6 +70,95 @@ nextStepButton.addEventListener("click", () => {
 previousStepButton.addEventListener("click", () => {
   turnPreviousPage(currentPageIndex);
 });
+
+submitButton.addEventListener("click", () => {
+  goToPageFive();
+});
+
+function goToPageFive() {
+  pageFour.classList.remove("appear");
+  console.log(nextStepContainer);
+  nextStepContainer.classList.add("disappear");
+  pageContent.classList.add("ending");
+  pageFive.classList.add("appear");
+}
+
+changePlanButton.addEventListener("click", () => {
+  goToPageTwo();
+});
+
+function goToPageTwo() {
+  currentPageIndex = 1;
+  pageFour.classList.remove("appear");
+  nextStepButton.classList.remove("inactive");
+  submitButton.classList.remove("active");
+  pageTwo.classList.add("appear");
+}
+
+function calculateBill() {
+  let planAndPeriod = "";
+  let periodTotal = "";
+  let valueToPay = 0;
+  let planTotal = 0;
+  let onlineService = 1;
+  let largerStorage = 2;
+  let customizableProfile = 2;
+
+  if (arcadeRadio.checked) {
+    planAndPeriod += "Arcade";
+    planTotal = 9;
+    planTotalLabel.textContent = "$9/mo";
+  } else if (advancedRadio.checked) {
+    planAndPeriod += "Advanced";
+    planTotal = 12;
+    planTotalLabel.textContent = "$12/mo";
+  } else if (proRadio.checked) {
+    planAndPeriod += "Pro";
+    planTotal = 15;
+  }
+  valueToPay += planTotal;
+
+  if (onlineServiceCheckbox.checked) {
+    valueToPay += onlineService;
+    onlineServiceContainer.classList.add("checked");
+  } else {
+    onlineServiceContainer.classList.remove("checked");
+  }
+  if (largerStorageCheckbox.checked) {
+    valueToPay += largerStorage;
+    largerStorageContainer.classList.add("checked");
+  } else {
+    largerStorageContainer.classList.remove("checked");
+  }
+  if (customizableProfileCheckbox.checked) {
+    valueToPay += customizableProfile;
+    customizableProfileContainer.classList.add("checked");
+  } else {
+    customizableProfileContainer.classList.remove("checked");
+  }
+
+  if (monthlyLabel.classList.contains("active")) {
+    periodTotal = "mo";
+    planAndPeriod += " (Monthly)";
+    totalPeriodLabel.textContent = "month";
+  } else {
+    periodTotal = "yr";
+    planAndPeriod += " (Yearly)";
+    onlineService *= 10;
+    largerStorage *= 10;
+    customizableProfile *= 10;
+    planTotal *= 10;
+    valueToPay *= 10;
+    totalPeriodLabel.textContent = "year";
+  }
+
+  onlineServiceTotal.textContent = `+$${onlineService}/${periodTotal}`;
+  largerStorageTotal.textContent = `+$${largerStorage}/${periodTotal}`;
+  customizableProfileTotal.textContent = `+$${customizableProfile}/${periodTotal}`;
+  planTotalLabel.textContent = `$${planTotal}/${periodTotal}`;
+  totalValueLabel.textContent = `$${valueToPay}/${periodTotal}`;
+  chosenPlanLabel.textContent = planAndPeriod;
+}
 
 function turnNextPage(index) {
   if (nameField.value === "") {
@@ -71,7 +207,10 @@ function turnNextPage(index) {
       pageTwo.classList.remove("appear");
       pageThree.classList.add("appear");
     } else if (currentPageIndex === 3) {
+      calculateBill();
       pageThree.classList.remove("appear");
+      nextStepButton.classList.add("inactive");
+      submitButton.classList.add("active");
       pageFour.classList.add("appear");
     }
   }
@@ -100,24 +239,12 @@ function turnPreviousPage(index) {
   } else if (currentPageIndex === 2) {
     pageThree.classList.add("appear");
     pageFour.classList.remove("appear");
+    nextStepButton.classList.remove("inactive");
+    submitButton.classList.remove("active");
   } else if (currentPageIndex === 3) {
     pageFour.classList.add("appear");
-    pageFive.classList.remove("appear");
   }
 }
-
-const monthlyLabel = document.querySelector(".monthly");
-monthlyLabel.classList.add("active");
-const yearlyLabel = document.querySelector(".yearly");
-const switchInput = document.querySelector(".switch-input");
-const arcadeCostLabel = document.querySelector(".plan-cost.arcade");
-const advancedCostLabel = document.querySelector(".plan-cost.advanced");
-const proCostLabel = document.querySelector(".plan-cost.pro");
-const serviceCostLabel = document.querySelector(".add-on-cost.service");
-const storageCostLabel = document.querySelector(".add-on-cost.storage");
-const profileCostLabel = document.querySelector(".add-on-cost.profile");
-
-const yearlyDiscountLabels = document.querySelectorAll(".yearly-discount");
 
 switchInput.addEventListener("change", () => {
   monthlyLabel.classList.toggle("active");
