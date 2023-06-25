@@ -54,108 +54,7 @@ function turnNextPage(index) {
     phoneField.value !== ""
   ) {
     currentPageIndex = index + 1;
-    let windowSize = window.innerWidth;
 
-    if (windowSize >= 700) {
-      mainContianer.classList.add("disappear");
-
-      setTimeout(function () {
-        if (currentPageIndex === 1) {
-          pageOne.classList.remove("show");
-          pageTwo.classList.add("appear");
-          previousStepButton.classList.add("appear");
-        } else if (currentPageIndex === 2) {
-          pageTwo.classList.remove("show");
-          pageThree.classList.add("appear");
-        } else if (currentPageIndex === 3) {
-          pageThree.classList.remove("show");
-          pageFour.classList.add("appear");
-        }
-      }, 300);
-    } else {
-      if (currentPageIndex === 1) {
-        pageOne.classList.remove("show");
-        pageTwo.classList.add("appear");
-        previousStepButton.classList.add("appear");
-      } else if (currentPageIndex === 2) {
-        pageTwo.classList.remove("show");
-        pageThree.classList.add("appear");
-      } else if (currentPageIndex === 3) {
-        pageThree.classList.remove("show");
-        pageFour.classList.add("appear");
-      }
-    }
-
-    setTimeout(function () {
-      navbarStepNumber.forEach((stepNumber, index) => {
-        if (index === currentPageIndex) {
-          stepNumber.classList.add("active");
-        } else {
-          stepNumber.classList.remove("active");
-        }
-      });
-      if (currentPageIndex === 1) {
-        pageOne.classList.remove("appear");
-        pageTwo.classList.add("show");
-        previousStepButton.classList.add("show");
-        nextStepContainer.classList.add("both-buttons");
-      } else if (currentPageIndex === 2) {
-        pageTwo.classList.remove("appear");
-        pageThree.classList.add("show");
-      } else if (currentPageIndex === 3) {
-        pageThree.classList.remove("appear");
-        pageFour.classList.add("show");
-      }
-
-      if (windowSize >= 700) {
-        mainContianer.classList.remove("disappear");
-      }
-    }, 300);
-  }
-}
-
-function turnPreviousPage(index) {
-  currentPageIndex = index - 1;
-
-  let windowSize = window.innerWidth;
-
-  if (windowSize >= 700) {
-    mainContianer.classList.add("disappear");
-
-    setTimeout(function () {
-      if (currentPageIndex === 0) {
-        pageOne.classList.add("appear");
-        pageTwo.classList.remove("show");
-        previousStepButton.classList.remove("show");
-      } else if (currentPageIndex === 1) {
-        pageTwo.classList.add("appear");
-        pageThree.classList.remove("show");
-      } else if (currentPageIndex === 2) {
-        pageThree.classList.add("appear");
-        pageFour.classList.remove("show");
-      } else if (currentPageIndex === 3) {
-        pageFour.classList.add("appear");
-        pageFive.classList.remove("show");
-      }
-    }, 300);
-  } else {
-    if (currentPageIndex === 0) {
-      pageOne.classList.add("appear");
-      pageTwo.classList.remove("show");
-      previousStepButton.classList.remove("show");
-    } else if (currentPageIndex === 1) {
-      pageTwo.classList.add("appear");
-      pageThree.classList.remove("show");
-    } else if (currentPageIndex === 2) {
-      pageThree.classList.add("appear");
-      pageFour.classList.remove("show");
-    } else if (currentPageIndex === 3) {
-      pageFour.classList.add("appear");
-      pageFive.classList.remove("show");
-    }
-  }
-
-  setTimeout(function () {
     navbarStepNumber.forEach((stepNumber, index) => {
       if (index === currentPageIndex) {
         stepNumber.classList.add("active");
@@ -163,26 +62,49 @@ function turnPreviousPage(index) {
         stepNumber.classList.remove("active");
       }
     });
-    if (currentPageIndex === 0) {
-      pageOne.classList.add("show");
-      pageTwo.classList.remove("appear");
-      previousStepButton.classList.remove("appear");
-      nextStepContainer.classList.remove("both-buttons");
-    } else if (currentPageIndex === 1) {
-      pageTwo.classList.add("show");
-      pageThree.classList.remove("appear");
-    } else if (currentPageIndex === 2) {
-      pageThree.classList.add("show");
-      pageFour.classList.remove("appear");
-    } else if (currentPageIndex === 3) {
-      pageFour.classList.add("show");
-      pageFive.classList.remove("appear");
-    }
 
-    if (windowSize >= 700) {
-      mainContianer.classList.remove("disappear");
+    if (currentPageIndex === 1) {
+      pageOne.classList.remove("appear");
+      pageTwo.classList.add("appear");
+      previousStepButton.classList.add("appear");
+      nextStepContainer.classList.add("both-buttons");
+    } else if (currentPageIndex === 2) {
+      pageTwo.classList.remove("appear");
+      pageThree.classList.add("appear");
+    } else if (currentPageIndex === 3) {
+      pageThree.classList.remove("appear");
+      pageFour.classList.add("appear");
     }
-  }, 300);
+  }
+}
+
+function turnPreviousPage(index) {
+  currentPageIndex = index - 1;
+
+  navbarStepNumber.forEach((stepNumber, index) => {
+    if (index === currentPageIndex) {
+      stepNumber.classList.add("active");
+    } else {
+      stepNumber.classList.remove("active");
+    }
+  });
+
+  if (currentPageIndex === 0) {
+    pageOne.classList.add("appear");
+    pageTwo.classList.remove("appear");
+    previousStepButton.classList.remove("show");
+    previousStepButton.classList.remove("appear");
+    nextStepContainer.classList.remove("both-buttons");
+  } else if (currentPageIndex === 1) {
+    pageTwo.classList.add("appear");
+    pageThree.classList.remove("appear");
+  } else if (currentPageIndex === 2) {
+    pageThree.classList.add("appear");
+    pageFour.classList.remove("appear");
+  } else if (currentPageIndex === 3) {
+    pageFour.classList.add("appear");
+    pageFive.classList.remove("appear");
+  }
 }
 
 const monthlyLabel = document.querySelector(".monthly");

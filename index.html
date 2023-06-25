@@ -40,7 +40,7 @@
         </ul>
       </header>
       <div class="page-content">
-        <form class="page-1">
+        <form class="page-1" id="page-1" name="page-1">
           <h1 class="page-title">Personal info</h1>
           <p class="page-description">
             Please provide your name, email address, and phone number.
@@ -48,50 +48,55 @@
           <ul class="personal-info">
             <li>
               <div class="label-container">
-                <label for="name-input" class="name-label">Name</label>
-                <p class="warning-msg">This field is required</p>
+                <label for="name-input" class="name-label">
+                  <div class="label-wrapper">
+                    <p class="name-label-text">Name</p>
+                    <p class="warning-msg">This field is required</p>
+                  </div>
+                  <input
+                    id="name-input"
+                    type="text"
+                    class="name-textarea"
+                    placeholder="e.g. Stephen King"
+                  />
+                </label>
               </div>
-              <input
-                id="name-input"
-                type="text"
-                class="name-textarea"
-                placeholder="e.g. Stephen King"
-                rows="1"
-              />
             </li>
             <li>
               <div class="label-container">
-                <label for="email-input" class="email-label"
-                  >Email Address</label
-                >
-                <p class="warning-msg">This field is required</p>
+                <label for="email-input" class="email-label">
+                  <div class="label-wrapper">
+                    <p class="email-label-text">Email Address</p>
+                    <p class="warning-msg">This field is required</p>
+                  </div>
+                  <input
+                    id="email-input"
+                    type="text"
+                    class="email-textarea"
+                    placeholder="e.g. stephenking@lorem.com"
+                  />
+                </label>
               </div>
-              <input
-                id="email-input"
-                type="text"
-                class="email-textarea"
-                placeholder="e.g. stephenking@lorem.com"
-                rows="1"
-              />
             </li>
             <li>
               <div class="label-container">
-                <label for="phone-input" class="phone-label"
-                  >Phone Number</label
-                >
-                <p class="warning-msg">This field is required</p>
+                <label for="phone-input" class="phone-label">
+                  <div class="label-wrapper">
+                    <p class="phone-label-text">Phone Number</p>
+                    <p class="warning-msg">This field is required</p>
+                  </div>
+                  <input
+                    id="phone-input"
+                    type="text"
+                    class="phone-textarea"
+                    placeholder="e.g. +1 234 567 890"
+                  />
+                </label>
               </div>
-              <input
-                id="phone-input"
-                type="text"
-                class="phone-textarea"
-                placeholder="e.g. +1 234 567 890"
-                rows="1"
-              />
             </li>
           </ul>
         </form>
-        <form class="page-2">
+        <form class="page-2" id="page-2" name="page-2">
           <h1 class="page-title">Select your plan</h1>
           <p class="page-description">
             You have the option of monthly or yearly billing.
@@ -180,14 +185,14 @@
           </ul>
           <div class="period-container">
             <p class="monthly">Monthly</p>
-            <label class="switch">
-              <input class="switch-input" type="checkbox" />
+            <label class="switch" for="switch-input">
+              <input class="switch-input" type="checkbox" id="switch-input" />
               <span class="slider round"></span>
             </label>
             <p class="yearly">Yearly</p>
           </div>
         </form>
-        <form class="page-3">
+        <form class="page-3" id="page-3" name="page-3">
           <h1 class="page-title">Pick add-ons</h1>
           <p class="page-description">
             Add-ons help enhance your gaming experience.
