@@ -1,4 +1,3 @@
-/*  */
 const pageOne = document.querySelector(".page-1");
 const pageTwo = document.querySelector(".page-2");
 const pageThree = document.querySelector(".page-3");
