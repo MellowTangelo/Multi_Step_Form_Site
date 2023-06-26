@@ -23,6 +23,7 @@
 
 body {
   background-color: hsla(206, 94%, 87%, 0.5);
+  min-height: 500px;
 }
 
 main {
