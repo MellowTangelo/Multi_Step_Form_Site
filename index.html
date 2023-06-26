@@ -273,7 +273,13 @@
                 <p class="chosen-plan">
                   Arcade <span class="chosen-period">Monthly</span>
                 </p>
-                <button type="button" class="change-plan-button">Change</button>
+                <button
+                  type="button"
+                  class="change-plan-button"
+                  aria-label="Change plan"
+                >
+                  Change
+                </button>
               </div>
               <p class="plan-total">$0/mo</p>
             </div>
@@ -324,9 +330,22 @@
           </p>
         </div>
         <div class="next-step-container">
-          <button class="previous-step-button">Go back</button>
-          <button class="next-step-button">Next step</button>
-          <button type="submit" class="submit-button">Confirm</button>
+          <button
+            class="previous-step-button"
+            aria-label="Move to previous page"
+          >
+            Go back
+          </button>
+          <button class="next-step-button" aria-label="Move to next page">
+            Next step
+          </button>
+          <button
+            type="submit"
+            class="submit-button"
+            aria-label="Confirm order"
+          >
+            Confirm
+          </button>
         </div>
       </div>
     </main>
