@@ -77,7 +77,6 @@ submitButton.addEventListener("click", () => {
 
 function goToPageFive() {
   pageFour.classList.remove("appear");
-  console.log(nextStepContainer);
   nextStepContainer.classList.add("disappear");
   pageContent.classList.add("ending");
   pageFive.classList.add("appear");
@@ -160,34 +159,80 @@ function calculateBill() {
   chosenPlanLabel.textContent = planAndPeriod;
 }
 
+function validateName() {
+  const validRegex = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
+
+  if (nameField.value.match(validRegex)) {
+    warningMsg[0].classList.remove("active");
+    nameField.classList.remove("invalid");
+    return true;
+  } else {
+    warningMsg[0].textContent = "Invalid name format";
+    warningMsg[0].classList.add("active");
+    nameField.classList.add("invalid");
+    return false;
+  }
+}
+
+function validateEmail() {
+  const validRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (emailField.value.match(validRegex)) {
+    warningMsg[1].classList.remove("active");
+    emailField.classList.remove("invalid");
+    return true;
+  } else {
+    warningMsg[1].textContent = "Invalid e-mail format";
+    warningMsg[1].classList.add("active");
+    emailField.classList.add("invalid");
+    return false;
+  }
+}
+
+function validatePhoneNumber() {
+  const validRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+
+  if (phoneField.value.match(validRegex)) {
+    warningMsg[2].classList.remove("active");
+    phoneField.classList.remove("invalid");
+    return true;
+  } else {
+    warningMsg[2].textContent = "Invalid phone number format";
+    warningMsg[2].classList.add("active");
+    phoneField.classList.add("invalid");
+    return false;
+  }
+}
+
 function turnNextPage(index) {
+  let isNameCorrect = false;
+  let isEmailCorrect = false;
+  let isPhoneCorrect = false;
+
   if (nameField.value === "") {
     warningMsg[0].classList.add("active");
     nameField.classList.add("invalid");
-  } else {
-    warningMsg[0].classList.remove("active");
-    nameField.classList.remove("invalid");
+  } else if (nameField.value.length > 0) {
+    isNameCorrect = validateName();
   }
+
   if (emailField.value === "") {
+    warningMsg[1].textContent = "This field is required";
     warningMsg[1].classList.add("active");
     emailField.classList.add("invalid");
-  } else {
-    warningMsg[1].classList.remove("active");
-    emailField.classList.remove("invalid");
+  } else if (emailField.value.length > 0) {
+    isEmailCorrect = validateEmail();
   }
+
   if (phoneField.value === "") {
     warningMsg[2].classList.add("active");
     phoneField.classList.add("invalid");
-  } else {
-    warningMsg[2].classList.remove("active");
-    phoneField.classList.remove("invalid");
+  } else if (phoneField.value.length > 0) {
+    isPhoneCorrect = validatePhoneNumber();
   }
 
-  if (
-    nameField.value !== "" &&
-    emailField.value !== "" &&
-    phoneField.value !== ""
-  ) {
+  if (isNameCorrect && isEmailCorrect && isPhoneCorrect) {
     currentPageIndex = index + 1;
 
     navbarStepNumber.forEach((stepNumber, index) => {
