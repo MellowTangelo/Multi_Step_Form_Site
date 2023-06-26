@@ -1,3 +1,4 @@
+/* Define constants */
 const pageOne = document.querySelector(".page-1");
 const pageTwo = document.querySelector(".page-2");
 const pageThree = document.querySelector(".page-3");
@@ -10,7 +11,6 @@ const navbarStepNumber = document.querySelectorAll(".step-number");
 const mainContianer = document.querySelector(".main-container");
 
 const monthlyLabel = document.querySelector(".monthly");
-monthlyLabel.classList.add("active");
 const yearlyLabel = document.querySelector(".yearly");
 const switchInput = document.querySelector(".switch-input");
 
@@ -59,10 +59,15 @@ const customizableProfileTotal = document.querySelector(
   ".customizable-profile-total"
 );
 
+/* Initialize variables*/
+
 let currentPageIndex = 0;
+monthlyLabel.classList.add("active");
 pageOne.classList.add("appear");
 pageOne.classList.add("show");
 navbarStepNumber[currentPageIndex].classList.add("active");
+
+/* Register event listeners */
 
 nextStepButton.addEventListener("click", () => {
   turnNextPage(currentPageIndex);
@@ -71,20 +76,23 @@ previousStepButton.addEventListener("click", () => {
   turnPreviousPage(currentPageIndex);
 });
 
-submitButton.addEventListener("click", () => {
-  goToPageFive();
+switchInput.addEventListener("change", () => {
+  changePeriod();
 });
-
-function goToPageFive() {
-  pageFour.classList.remove("appear");
-  nextStepContainer.classList.add("disappear");
-  pageContent.classList.add("ending");
-  pageFive.classList.add("appear");
-}
 
 changePlanButton.addEventListener("click", () => {
   goToPageTwo();
 });
+
+submitButton.addEventListener("click", () => {
+  goToPageFive();
+});
+
+/*Define helper functions*/
+
+/**
+ * Sets page 2 to be active again (e.g.: user wants to change the plan and some other options).
+ */
 
 function goToPageTwo() {
   currentPageIndex = 1;
@@ -93,6 +101,22 @@ function goToPageTwo() {
   submitButton.classList.remove("active");
   pageTwo.classList.add("appear");
 }
+
+/**
+ * Displays final message (Form is correctly filled out).
+ */
+
+function goToPageFive() {
+  pageFour.classList.remove("appear");
+  nextStepContainer.classList.add("disappear");
+  pageContent.classList.add("ending");
+  pageFive.classList.add("appear");
+}
+
+/**
+ * Calculates content and total value for payment based on
+ * active/checked values of options from page 2 to page 4.
+ */
 
 function calculateBill() {
   let planAndPeriod = "";
@@ -159,6 +183,15 @@ function calculateBill() {
   chosenPlanLabel.textContent = planAndPeriod;
 }
 
+/**
+ * Validates name (and last name) entry. Here are some examples of correct entries:
+ * John
+ * John Adams
+ * john adams
+ * John adams
+ * john Adams
+ */
+
 function validateName() {
   const validRegex = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
 
@@ -173,6 +206,13 @@ function validateName() {
     return false;
   }
 }
+
+/**
+ * Validates phone number entry. Here are some examples of correct entries:
+ * john.adams@philly.com
+ * johnadams@philly.com
+ * johnadams@philly.eu
+ */
 
 function validateEmail() {
   const validRegex =
@@ -190,6 +230,15 @@ function validateEmail() {
   }
 }
 
+/**
+ * Validates phone number entry. Here are some examples of correct entries:
+ * +12-3456-7890
+ * +12 3456 7890
+ * (12)3456-7890
+ * 1234-5678
+ * 12345678
+ */
+
 function validatePhoneNumber() {
   const validRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
 
@@ -204,6 +253,11 @@ function validatePhoneNumber() {
     return false;
   }
 }
+
+/**
+ * Changes active page container to next page container based on current active page index.
+ * * @param  {[number]} index Current (active) page index.
+ */
 
 function turnNextPage(index) {
   let isNameCorrect = false;
@@ -261,6 +315,11 @@ function turnNextPage(index) {
   }
 }
 
+/**
+ * Changes active page container to previous page container based on current active page index.
+ * * @param  {[number]} index Current (active) page index.
+ */
+
 function turnPreviousPage(index) {
   currentPageIndex = index - 1;
 
@@ -291,7 +350,12 @@ function turnPreviousPage(index) {
   }
 }
 
-switchInput.addEventListener("change", () => {
+/**
+ * Sets a period of payment to either monthly payment or yearly payment.
+ * Changes contents on the webpage accordingly.
+ */
+
+function changePeriod() {
   monthlyLabel.classList.toggle("active");
   yearlyLabel.classList.toggle("active");
 
@@ -329,4 +393,4 @@ switchInput.addEventListener("change", () => {
   yearlyDiscountLabels.forEach((yearlyDiscountLabel) => {
     yearlyDiscountLabel.style.opacity = 1;
   });
-});
+}
