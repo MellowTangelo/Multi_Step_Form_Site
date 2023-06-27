@@ -69,7 +69,47 @@ navbarStepNumber[currentPageIndex].classList.add("active");
 
 /* Register event listeners */
 
-nextStepButton.addEventListener("click", () => {
+pageOne.addEventListener("submit", function (event) {
+  event.preventDefault();
+  turnNextPage(currentPageIndex);
+});
+
+pageTwo.addEventListener("submit", function (event) {
+  event.preventDefault();
+  turnNextPage(currentPageIndex);
+});
+
+pageThree.addEventListener("submit", function (event) {
+  event.preventDefault();
+  turnNextPage(currentPageIndex);
+});
+
+nextStepButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  let form;
+  if (currentPageIndex === 0) {
+    form = pageOne;
+  } else if (currentPageIndex === 1) {
+    form = pageTwo;
+  } else if (currentPageIndex === 2) {
+    form = pageThree;
+  }
+
+  // Serialize form data
+  const formData = new FormData(form);
+
+  // Perform AJAX request
+  fetch(form.action, {
+    method: form.method,
+    body: formData,
+  })
+    .then((response) => {
+      turnNextPage();
+    })
+    .catch((error) => {
+      console.error("Form submission error:", error);
+    });
+
   turnNextPage(currentPageIndex);
 });
 previousStepButton.addEventListener("click", () => {
